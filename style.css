@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 960px; /* Adjust the width to fit your needs */
+}
+
+.square {
+    width: calc(960px / var(--grid-size)); /* Adjust the size based on the number of squares per side */
+    height: calc(960px / var(--grid-size));
+    border: 1px solid black;
+}
+
+/* Add a new class for the hovered squares */
+.square.hovered {
+    background-color: red; /* Change the background color as desired */
+    transition: background-color 0.2s ease-out;
+}
+
+

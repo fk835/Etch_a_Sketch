@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"  href="style.css">
+</head>
+<body>
+    <div>
+        <button onclick="createNewGrid()">Create New Grid</button>
+    </div>
+    <div class="container" id="grid-container"></div>
+
+    <script>
+        function createNewGrid() {
+            const squaresPerSide = prompt('Enter the number of squares per side (maximum 100):');
+            const container = document.getElementById('grid-container');
+            container.innerHTML = ''; // Clear the existing grid
+
+            // Validate user input
+            const numSquares = parseInt(squaresPerSide);
+            if (isNaN(numSquares) || numSquares < 1 || numSquares > 100) {
+                alert('Invalid input. Please enter a number between 1 and 100.');
+                return;
+            }
+
+            // Generate the new grid
+            container.style.setProperty('--grid-size', numSquares); // Set CSS custom property for grid size
+
+            for (let i = 0; i < numSquares; i++) {
+                for (let j = 0; j < numSquares; j++) {
+                    const square = document.createElement('div');
+                    square.classList.add('square');
+                    container.appendChild(square);
+
+                    // Set initial RGB values
+                    let red = 0;
+                    let green = 0;
+                    let blue = 0;
+                    let darkness = 0;
+
+                    // Add event listener for hover effect
+                    square.addEventListener('mouseenter', () => {
+                        // Randomize RGB values
+                        red = Math.floor(Math.random() * 256);
+                        green = Math.floor(Math.random() * 256);
+                        blue = Math.floor(Math.random() * 256);
+
+                        // Calculate new darkness level
+                        darkness += 10;
+                        if (darkness > 100) darkness = 100;
+
+                        // Apply the new color
+                        square.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+                        square.style.filter = `brightness(${100 - darkness}%)`;
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+</html>
